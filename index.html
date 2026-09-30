@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f9ff">
+  <meta name="description" content="Entwurf einer Website für das Onkologische Zentrum Prenzlauer Berg.">
+  <title>Onkologisches Zentrum Prenzlauer Berg | Dr. Med. Konstantin Walter</title>
+  <style>
+    :root {
+      --navy: #12345a;
+      --blue: #1769aa;
+      --cyan: #38b8d8;
+      --mint: #20ad9b;
+      --ink: #172b45;
+      --muted: #60748d;
+      --line: #e0eaf3;
+      --paper: #ffffff;
+      --bg: #f4f9ff;
+      --soft: #eaf6ff;
+      --shadow: 0 16px 48px rgba(22, 65, 105, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+    }
+    a { color: inherit; }
+    .wrap { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(255,255,255,.94); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(218,232,244,.9);
+    }
+    header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; color: var(--navy); font-weight: 750; line-height: 1.15; }
+    .brand-mark {
+      width: 44px; height: 44px; flex: 0 0 44px; display: grid; place-items: center;
+      color: white; border-radius: 14px; background: linear-gradient(145deg, var(--blue), var(--cyan));
+      box-shadow: 0 7px 18px rgba(23,105,170,.22);
+    }
+    .brand-mark svg { width: 27px; height: 27px; }
+    .brand span { font-size: 16px; }
+    nav { display: flex; align-items: center; gap: 30px; color: #526984; font-size: 14px; }
+    nav a { text-decoration: none; padding: 10px 0; }
+    nav a:hover { color: var(--blue); }
+    .nav-cta, .primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      text-decoration: none; border: 0; border-radius: 999px; color: white;
+      background: linear-gradient(110deg, var(--blue), #258fc2); font-weight: 700;
+      box-shadow: 0 9px 22px rgba(23,105,170,.2); transition: transform .2s, box-shadow .2s;
+    }
+    .nav-cta { padding: 13px 19px; font-size: 14px; }
+    .primary { padding: 15px 22px; font-size: 15px; }
+    .nav-cta:hover, .primary:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(23,105,170,.27); }
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      background: radial-gradient(ellipse at 82% 15%, rgba(67,190,219,.2), transparent 35%),
+                  linear-gradient(115deg, #e9f6ff 0%, #f4faff 53%, #e4f5fb 100%);
+    }
+    .hero:before, .hero:after { content: ""; position: absolute; z-index: -1; border-radius: 50%; border: 1px solid rgba(38,151,193,.12); }
+    .hero:before { width: 520px; height: 520px; right: -120px; top: -230px; box-shadow: 0 0 0 42px rgba(38,151,193,.035), 0 0 0 90px rgba(38,151,193,.025); }
+    .hero:after { width: 270px; height: 270px; right: 11%; bottom: -190px; background: rgba(255,255,255,.18); }
+    .hero-inner { min-height: 405px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 36px; padding-top: 48px; padding-bottom: 50px; }
+    .eyebrow { color: var(--blue); text-transform: uppercase; letter-spacing: .13em; font-size: 12px; font-weight: 800; }
+    h1 { margin: 15px 0 10px; max-width: 720px; color: var(--navy); font-size: clamp(36px, 5vw, 58px); letter-spacing: -.045em; line-height: 1.04; }
+    .subtitle { margin: 0; font-size: clamp(19px, 2.3vw, 27px); color: #345675; font-weight: 550; }
+    .intro { max-width: 580px; margin: 22px 0 27px; color: #5c7189; font-size: 17px; line-height: 1.7; }
+    .hero-art { min-height: 270px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .art-orb { width: min(310px, 100%); aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%;
+      background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(213,240,251,.7)); border: 1px solid rgba(255,255,255,.95);
+      box-shadow: 0 22px 65px rgba(29,111,160,.12), inset 0 0 35px rgba(255,255,255,.8); }
+    .art-orb svg { width: 60%; height: 60%; filter: drop-shadow(0 10px 13px rgba(23,105,170,.12)); }
+    .float-card { position: absolute; right: 0; bottom: 24px; display: flex; align-items: center; gap: 11px; padding: 13px 16px; border-radius: 16px; background: white; box-shadow: var(--shadow); color: var(--navy); font-size: 13px; font-weight: 700; }
+    .float-icon { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; color: var(--mint); background: #e6faf5; }
+    .features { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; padding: 31px 0 35px; }
+    .feature { display: flex; align-items: center; gap: 13px; padding: 8px 4px; }
+    .feature-icon { width: 52px; height: 52px; flex: 0 0 52px; border-radius: 17px; display: grid; place-items: center; background: #e1f4ff; color: var(--blue); }
+    .feature:nth-child(2) .feature-icon { background: #e3faf5; color: #149c8b; }
+    .feature:nth-child(3) .feature-icon { background: #f0eaff; color: #8061c7; }
+    .feature:nth-child(4) .feature-icon { background: #fff0e7; color: #e18b4e; }
+    .feature-icon svg { width: 25px; height: 25px; }
+    .feature strong { display: block; font-size: 14px; color: var(--navy); line-height: 1.3; }
+    .feature small { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .content { padding: 4px 0 64px; }
+    .section-heading { text-align: center; margin: 12px auto 27px; }
+    .section-heading h2 { margin: 9px 0; color: var(--navy); font-size: clamp(25px, 3vw, 34px); letter-spacing: -.025em; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 15px; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card { display: flex; gap: 19px; min-height: 174px; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); box-shadow: var(--shadow); }
+    .card-icon { width: 54px; height: 54px; flex: 0 0 54px; display: grid; place-items: center; border-radius: 17px; color: var(--blue); background: #eaf6ff; }
+    .card:nth-child(2) .card-icon { color: #169f8f; background: #e5faf5; }
+    .card:nth-child(3) .card-icon { color: #8564c8; background: #f1ebff; }
+    .card-icon svg { width: 27px; height: 27px; }
+    .card h3 { margin: 3px 0 13px; color: var(--navy); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .label { margin: 0 0 5px; color: #91a2b5; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+    .value { margin: 0; color: var(--ink); font-size: 19px; font-weight: 650; line-height: 1.4; }
+    .detail { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .phone { color: var(--blue); text-decoration: none; font-size: 22px; font-weight: 750; }
+    .specialty { grid-column: 1 / -1; min-height: auto; align-items: center; background: linear-gradient(105deg, #fff, #f1fbff); }
+    .specialty .card-icon { background: #e0f8f3; color: #159c8a; }
+    footer { color: #e3eef8; background: linear-gradient(110deg, #12345a, #174c75); }
+    .footer-inner { min-height: 104px; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 20px; padding-bottom: 20px; }
+    .footer-brand { font-weight: 700; font-size: 15px; }
+    .footer-note { margin-top: 5px; color: #b8cde0; font-size: 12px; }
+    .footer-tag { color: #d2e7f5; font-size: 12px; }
+    .demo { margin: 0; padding: 10px 20px; text-align: center; background: #eaf2f8; color: #5d7187; font-size: 11px; }
+    @media (max-width: 800px) {
+      nav { gap: 15px; } .hero-inner { grid-template-columns: 1fr .65fr; }
+      .features { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 32px, 1160px); }
+      header { min-height: 70px; } .brand span { font-size: 13px; }
+      .brand-mark { width: 39px; height: 39px; flex-basis: 39px; }
+      nav a:not(.nav-cta) { display: none; } .nav-cta { padding: 11px 13px; font-size: 12px; }
+      .hero-inner { display: block; padding-top: 52px; padding-bottom: 24px; }
+      h1 { font-size: 39px; } .intro { font-size: 15px; }
+      .hero-art { min-height: 190px; margin-top: 4px; }
+      .art-orb { width: 185px; } .float-card { right: 3%; bottom: 5px; padding: 9px 12px; }
+      .features { gap: 10px; padding: 24px 0; }
+      .feature { align-items: flex-start; gap: 9px; } .feature-icon { width: 42px; height: 42px; flex-basis: 42px; border-radius: 13px; }
+      .feature strong { font-size: 12px; } .feature small { font-size: 11px; }
+      .cards { grid-template-columns: 1fr; } .card { min-height: 150px; padding: 22px; }
+      .specialty { grid-column: auto; } .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <header>
+        <a class="brand" href="#start" aria-label="Onkologisches Zentrum Prenzlauer Berg – Startseite">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M13 3h6v10h10v6H19v10h-6V19H3v-6h10V3Z" fill="currentColor"/></svg></span>
+          <span>Onkologisches Zentrum<br>Prenzlauer Berg</span>
+        </a>
+        <nav aria-label="Hauptnavigation">
+          <a href="#start">Startseite</a><a href="#arzt">Über uns</a><a href="#leistungen">Leistungen</a><a href="#kontakt">Kontakt</a>
+          <a class="nav-cta" href="tel:+4915732997969"><span aria-hidden="true">☎</span> Termin anfragen</a>
+        </nav>
+      </header>
+    </div>
+  </div>
+
+  <main id="start">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="eyebrow">Facharzt für Onkologie</div>
+          <h1>Dr. Med.<br>Konstantin Walter</h1>
+          <p class="subtitle">Onkologisches Zentrum Prenzlauer Berg</p>
+          <p class="intro">Individuelle Betreuung und persönliche Begleitung bei onkologischen Erkrankungen.</p>
+          <a class="primary" href="tel:+4915732997969"><span aria-hidden="true">☎</span> Telefonisch Kontakt aufnehmen</a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orb">
+            <svg viewBox="0 0 240 240" fill="none">
+              <circle cx="120" cy="120" r="94" stroke="#b8e6f5" stroke-width="2" stroke-dasharray="5 8"/>
+              <path d="M120 38v27M120 175v27M38 120h27M175 120h27" stroke="#b8e6f5" stroke-width="3" stroke-linecap="round"/>
+              <path d="M103 52h34v51h51v34h-51v51h-34v-51H52v-34h51V52Z" fill="url(#g)" />
+              <path d="M120 83v73M83 120h73" stroke="white" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="120" cy="120" r="79" stroke="#fff" stroke-width="2" opacity=".9"/>
+              <defs><linearGradient id="g" x1="55" y1="55" x2="190" y2="190" gradientUnits="userSpaceOnUse"><stop stop-color="#39bddb"/><stop offset="1" stop-color="#1769aa"/></linearGradient></defs>
+            </svg>
+          </div>
+          <div class="float-card"><span class="float-icon">✚</span><span>Onkologische<br>Betreuung</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <section class="features" aria-label="Schwerpunkte">
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></span><span><strong>Moderne Onkologie</strong><small>Individuelle Behandlungskonzepte</small></span></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20v-2a6.5 6.5 0 0 1 13 0v2ZM16 5.5a3.5 3.5 0 0 1 0 6.8M18 15a5 5 0 0 1 3.5 5"/></svg></span><span><strong>Persönliche Betreuung</strong><small>Zeit für Fragen und Anliegen</small></span></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M7 17l3-5 3 2 4-8"/><circle cx="17" cy="6" r="2"/></svg></span><span><strong>Diagnostik</strong><small>Abklärung und Therapieplanung</small></span></div>
+        <div class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 8.8c0 5.2-8.8 11-8.8 11s-8.8-5.8-8.8-11A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7Z"/></svg></span><span><strong>Ganzheitlicher Ansatz</strong><small>Den Menschen im Blick</small></span></div>
+      </section>
+
+      <section class="content" id="arzt">
+        <div class="section-heading"><div class="eyebrow">Willkommen</div><h2>Medizin mit persönlicher Begleitung</h2><p>Informationen zum Ansprechpartner und zur Kontaktaufnahme.</p></div>
+        <div class="cards">
+          <article class="card">
+            <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2Z"/></svg></span>
+            <div><h3>Ansprechpartner</h3><p class="label">Name</p><p class="value">Dr. Med. Konstantin Walter</p><p class="detail">Fachgebiet: Onkologie</p></div>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V5l9-3 9 3v16M7 21v-5h4v5M7 8h2m-2 4h2m6-4h2m-2 4h2"/></svg></span>
+            <div><h3>Einrichtung</h3><p class="label">Zentrum</p><p class="value">Onkologisches Zentrum Prenzlauer Berg</p></div>
+          </article>
+          <article class="card" id="kontakt">
+            <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16.5v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 10.2 18a19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 1.5 3.2 2 2 0 0 1 3.5 1h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L7.4 9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.3 2.6Z"/></svg></span>
+            <div><h3>Kontakt</h3><p class="label">Telefon</p><a class="phone" href="tel:+4915732997969">+49 157 32997969</a><p class="detail">Für eine Kontaktaufnahme bitte telefonisch anrufen.</p></div>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M12 8v8m-4-4h8"/></svg></span>
+            <div><h3>Fachgebiet</h3><p class="label">Schwerpunkt</p><p class="value">Onkologie</p><p class="detail">Diagnostik, Behandlung und Begleitung bei Krebserkrankungen.</p></div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><div class="footer-brand">Onkologisches Zentrum Prenzlauer Berg</div><div class="footer-note">Persönliche Begleitung bei onkologischen Erkrankungen</div></div>
+      <div class="footer-tag">Gemeinsam den nächsten Schritt gehen.</div>
+    </div>
+  </footer>
+  <p class="demo">Website-Entwurf. Bitte Qualifikationen, Zugehörigkeit zur Einrichtung, Kontaktdaten und rechtliche Angaben vor einer Veröffentlichung prüfen und bestätigen.</p>
+</body>
+</html>
